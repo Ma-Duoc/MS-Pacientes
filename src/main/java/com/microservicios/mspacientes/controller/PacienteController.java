@@ -20,7 +20,6 @@ import org.springframework.security.core.Authentication;
 @RestController
 @RequestMapping("/api/pacientes")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class PacienteController {
     
     private final PacienteService pacienteService;
@@ -28,7 +27,9 @@ public class PacienteController {
     // ---------------- AUTH ----------------
 
     @PostMapping("/usuarios/registro")
-    public ResponseEntity<PacienteResponse> registrarPaciente(@Valid @RequestBody PacienteRegistroRequest request) {
+    public ResponseEntity<PacienteResponse> registrarPaciente(
+            @Valid @RequestBody PacienteRegistroRequest request) {
+
         PacienteResponse response = pacienteService.registrarPaciente(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
